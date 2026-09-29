@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>A feature film · Redding, CA · 2027</title>
+<style>
+  /* One family: Helvetica Neue, to match the A24 trailer titles. Three weights, five sizes. */
+  :root {
+    --xs: 7.5pt;   /* labels, captions, footer */
+    --s: 9.5pt;    /* body */
+    --m: 12pt;     /* top line, key lines */
+    --l: 20pt;     /* numbers */
+    --xl: 30pt;    /* lookbook titles */
+
+    /* Liminal palette: 60% white, 30% ink, 10% fluorescent */
+    --ink: #1e1b16;
+    --muted: #6b6456;
+    --accent: #7a5b12;   /* mustard: text-safe accent */
+    --glow: #c9a227;     /* fluorescent: lines and fills only */
+    --tint: #f7f1da;
+    --hair: #e6dfcc;
+    --dark: #17150f;
+    --paper: #fbf8ef;
+  }
+  @page { size: 8.5in 11in; margin: 0; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    counter-reset: pg;
+    background: #d9d4c7;
+    color: var(--ink);
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: var(--s);
+    line-height: 1.4;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .page {
+    width: 8.5in;
+    height: 11in;
+    margin: 0.3in auto;
+    padding: 0.5in 0.6in 0.42in;
+    background: #fff;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.18);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    break-after: page;
+    counter-increment: pg;
+  }
+  /* Page number, bottom right */
+  .page::after { content: counter(pg); position: absolute; right: 0.6in; bottom: 0.22in; font-size: var(--xs); letter-spacing: 0.08em; color: var(--muted); }
+  .film.dark::after { color: #a79f8a; }
+  @media print {
+    body { background: #fff; }
+    .page { margin: 0; box-shadow: none; zoom: 1 !important; }
+  }
+  p { margin: 0; }
+  p + p { margin-top: 0.035in; }
+  b, strong { font-weight: 700; }
+  .bold { font-weight: 700; -webkit-text-stroke: 0.012em currentColor; }
+  .muted { color: var(--muted); }
+
+  /* Header */
+  .top { font-size: var(--m); font-weight: 700; letter-spacing: -0.005em; text-transform: uppercase; -webkit-text-stroke: 0.012em currentColor; }
+  .sub { display: flex; justify-content: space-between; color: var(--muted); font-size: var(--xs); letter-spacing: 0.02em; margin-top: 0.05in; padding-bottom: 0.12in; border-bottom: 1.5px solid var(--ink); }
+
+  /* Bands */
+  .bands { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+  .band { display: grid; grid-template-columns: 1.1in 1fr; column-gap: 0.2in; padding: 0.11in 0; border-top: 1px solid var(--hair); }
+  .band:first-child { border-top: 0; }
+  .label { font-size: var(--xs); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); padding-top: 0.025in; }
+
+  .three { display: grid; grid-template-columns: repeat(3, max-content); column-gap: 0.3in; margin-top: 0.05in; }
+  .three div { border-top: 2px solid var(--glow); padding-top: 0.05in; font-weight: 500; }
+
+  .formula { font-size: var(--m); font-weight: 700; margin-bottom: 0.05in; -webkit-text-stroke: 0.012em currentColor; }
+  .formula .tag { font-size: var(--xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-right: 0.1in; -webkit-text-stroke: 0; }
+
+  .stats { display: grid; grid-template-columns: repeat(5, 1fr); column-gap: 0.12in; margin-top: 0.07in; }
+  .stats .n { font-size: var(--l); font-weight: 700; line-height: 1; letter-spacing: -0.02em; -webkit-text-stroke: 0.012em currentColor; }
+  .stats .t { font-size: var(--xs); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); margin-top: 0.04in; line-height: 1.25; }
+
+  .phases { display: grid; grid-template-columns: repeat(5, 1fr); column-gap: 0.1in; margin-top: 0.02in; }
+  .phases div { border-top: 2px solid var(--glow); padding-top: 0.05in; line-height: 1.3; }
+  .phases .num { display: block; font-size: var(--xs); font-weight: 700; letter-spacing: 0.12em; color: var(--accent); }
+  .phases .name { display: block; font-weight: 700; white-space: nowrap; margin: 0.02in 0 0.02in; letter-spacing: -0.01em; }
+  .after { margin-top: 0.08in; }
+
+  .films i { font-style: italic; }
+
+  .invite { background: var(--tint); border-left: 3px solid var(--glow); padding: 0.11in 0.16in; }
+  .invite .head { font-size: var(--m); font-weight: 700; margin-bottom: 0.04in; -webkit-text-stroke: 0.012em currentColor; }
+  .invite ol { margin: 0.05in 0 0; padding: 0; list-style: none; counter-reset: q; }
+  .invite li { counter-increment: q; position: relative; padding-left: 0.22in; margin-top: 0.035in; font-weight: 500; }
+  .invite li::before { content: counter(q); position: absolute; left: 0; font-weight: 700; color: var(--accent); }
+
+  .foot { margin-top: 0.08in; padding-top: 0.08in; border-top: 1px solid var(--hair); font-size: var(--xs); color: var(--muted); letter-spacing: 0.02em; }
+
+  /* Film pages: the official trailer, then Nick's stills. Dark by default, light where the film is bright. */
+  .page { zoom: var(--fit, 1); }
+  .film.dark { background: var(--dark); color: var(--paper); }
+  .film-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 0.2in; padding-bottom: 0.1in; border-bottom: 1.5px solid var(--ink); }
+  .film.dark .film-head { border-bottom-color: #3a3526; }
+  .film-title { font-size: var(--xl); font-weight: 700; line-height: 1; letter-spacing: -0.015em; text-transform: uppercase; margin-top: 0.06in; -webkit-text-stroke: 0.012em currentColor; text-wrap: balance; }
+  .film-meta { font-size: var(--xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding-bottom: 0.03in; white-space: nowrap; }
+  .film.dark .film-meta { color: #a79f8a; }
+  .film-body { flex: 1; display: flex; flex-direction: column; gap: 0.16in; padding-top: 0.2in; min-height: 0; }
+  .trailer { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; }
+  .trailer iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.14in; }
+  .grid.one { grid-template-columns: 1fr; }
+  .cell { margin: 0; aspect-ratio: var(--ar, 16 / 9); background: #efeadb; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .film.dark .cell { background: #0d0c08; }
+  /* Tan page for the dreamcore shots, the same tan as the space around them */
+  .film.tan, .film.tan .cell { background: #efeadb; }
+  .cell img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .mini { display: flex; flex-direction: column; gap: 0.2in; }
+  .mini h3 { margin: 0 0 0.06in; font-size: var(--m); font-weight: 700; text-transform: uppercase; letter-spacing: -0.005em; -webkit-text-stroke: 0.012em currentColor; display: flex; justify-content: space-between; align-items: baseline; }
+  .mini h3 span { font-size: var(--xs); font-weight: 400; letter-spacing: 0.12em; color: #a79f8a; -webkit-text-stroke: 0; }
+  .mini.n2 .trailer { width: 92%; }
+  .mini.n3 .trailer { width: 60%; }
+</style>
+</head>
+<body>
+
+<section class="page">
+  <div class="top">A feature film · Redding, CA · 2027</div>
+  <div class="sub"><span>Nick Dan, producer</span><span>September 2026</span></div>
+
+  <div class="bands">
+  <div class="band">
+    <div class="label">Why</div>
+    <div>
+      <p>Over ten years of wanting to make a film.</p>
+      <p>On September 22 I dreamed I asked MrBeast one question.</p>
+      <p>His answer: you don't need anyone's permission.</p>
+      <p>What kept me up was other people's dreams. I only want to make this with a community.</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="label">What I bring</div>
+    <div>
+      <p class="muted">No film experience. Three strengths:</p>
+      <div class="three"><div>Focus on the main constraint</div><div>Strategy and planning</div><div>Execution and follow&#8209;through</div></div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="label">Ownership</div>
+    <div>
+      <div class="formula"><span class="tag">Slicing Pie</span>Your points ÷ all points = your share</div>
+      <p>Not my project. Not the director's project. Every task earns points. Points are ownership.</p>
+      <p>No one is paid. If the film earns money, points decide the split. Leads earn a small bonus.</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="label">The AI</div>
+    <div>
+      <p>Built from 15 of YouTube's best filmmaking channels, organized by the five phases.</p>
+      <div class="stats">
+        <div><div class="n">12,942</div><div class="t">videos</div></div>
+        <div><div class="n">2,700+</div><div class="t">hours, a year of watching</div></div>
+        <div><div class="n">28.8M</div><div class="t">words, about 300 novels</div></div>
+        <div><div class="n">20</div><div class="t">years of know&#8209;how</div></div>
+        <div><div class="n">2,000+</div><div class="t">term glossary</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="label">The five phases<br><span class="muted" style="letter-spacing:.06em">Jan to Dec 2027</span></div>
+    <div>
+      <div class="phases">
+        <div><span class="num">01</span><span class="name">Development</span>A want, an obstacle, a story. Pick the ending first.</div>
+        <div><span class="num">02</span><span class="name">Pre&#8209;production</span>Remove decisions before shoot day.</div>
+        <div><span class="num">03</span><span class="name">Production</span>Capture it once. Protect quality and time.</div>
+        <div><span class="num">04</span><span class="name">Post&#8209;production</span>The edit is a second act of writing.</div>
+        <div><span class="num">05</span><span class="name">Distribution</span>Build in attention. Let mystery do the marketing.</div>
+      </div>
+      <p class="after">Each phase, three ways: first principles, reverse engineering, inversion.</p>
+      <p>Commit only to the phases your role needs.</p>
+      <p>One optional night a week: my house, Google&nbsp;Meet, or the AI notes.</p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="label">The film</div>
+    <div>
+      <p>Psychological thriller · suspense · light horror. A feature, about 15 to 25 shoot days.</p>
+      <p>Story written by a small group, starting in January.</p>
+      <p class="films"><span class="muted">Inspired by</span> <i>Backrooms, Exit&nbsp;8, Parasite, The&nbsp;Hunger&nbsp;Games: Mockingjay, Part&nbsp;1, Portal&nbsp;2, Inception, Blade&nbsp;Runner&nbsp;2049, 1917, You&nbsp;Can&nbsp;See&nbsp;Everything</i></p>
+    </div>
+  </div>
+
+  <div class="band">
+    <div class="label">The invitation</div>
+    <div class="invite">
+      <div class="head">Three questions to take home.</div>
+      <p>No commitment today. I'll show you everything first: the contracts and what each phase needs.</p>
+      <ol>
+        <li>Are you potentially interested in being part of this, at any level?</li>
+        <li>Is there a specific role you'd want?</li>
+        <li>Could you make time in 2027 for what that role needs? How and when is up to you.</li>
+      </ol>
+    </div>
+  </div>
+  </div>
+
+  <div class="foot">Next pages: the films that shaped this, with their trailers and stills.</div>
+</section>
+
+<section class="page film dark" id="backrooms">
+  <div class="film-head"><div class="film-title">Backrooms</div><div class="film-meta">2026</div></div>
+  <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/0HjdiohVOik?rel=0" title="Backrooms: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 1.847"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.09.06 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.09.14 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.09.43 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.00 PM.jpg" alt="Backrooms still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film dark">
+  <div class="film-head"><div class="film-title">Backrooms</div><div class="film-meta">2026</div></div>
+  <div class="film-body"><div class="grid" style="--ar: 1.847"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.06 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.14 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.17 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.27 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.36 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.54 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.59 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.11.18 PM.jpg" alt="Backrooms still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film dark">
+  <div class="film-head"><div class="film-title">Backrooms</div><div class="film-meta">2026</div></div>
+  <div class="film-body"><div class="grid" style="--ar: 1.847"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.11.23 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.11.37 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.11.41 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.11.51 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.12.13 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.12.35 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.12.40 PM.jpg" alt="Backrooms still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film light" id="exit-8">
+  <div class="film-head"><div class="film-title">Exit 8</div><div class="film-meta">2025</div></div>
+  <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/zzEDWwhtAHc?rel=0" title="Exit 8: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 1.842"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.06.59 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.07.11 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.07.34 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.07.45 PM.jpg" alt="Exit 8 still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film light">
+  <div class="film-head"><div class="film-title">Exit 8</div><div class="film-meta">2025</div></div>
+  <div class="film-body"><div class="grid" style="--ar: 1.842"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.07.50 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.08.00 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.08.08 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.08.17 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.08.31 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.08.44 PM.jpg" alt="Exit 8 still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film dark" id="parasite">
+  <div class="film-head"><div class="film-title">Parasite</div><div class="film-meta">2019</div></div>
+  <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/isOGD_7hNIY?rel=0" title="Parasite: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 2.075"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.14.58 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.06 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.19 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.24 PM.jpg" alt="Parasite still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film dark">
+  <div class="film-head"><div class="film-title">Parasite</div><div class="film-meta">2019</div></div>
+  <div class="film-body"><div class="grid" style="--ar: 2.075"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.31 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.36 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.41 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.51 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.16.00 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.16.14 PM.jpg" alt="Parasite still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film dark">
+  <div class="film-head"><div class="film-title">Trailers</div></div>
+  <div class="film-body"><div class="mini n3"><div><h3>The Hunger Games: Mockingjay, Part 1<span>2014</span></h3><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/C_Tsj_wTJkQ?rel=0" title="The Hunger Games: Mockingjay, Part 1: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div><div><h3>Portal 2<span>Game, 2011</span></h3><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/tax4e4hBBZc?rel=0" title="Portal 2: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div><div><h3>Inception<span>2010</span></h3><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/Qwe6qXFTdgc?rel=0" title="Inception: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div></div></div></div>
+</section>
+<section class="page film dark" id="blade-runner-2049">
+  <div class="film-head"><div class="film-title">Blade Runner 2049</div><div class="film-meta">2017</div></div>
+  <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/gCcx85zbxz4?rel=0" title="Blade Runner 2049: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 2.105"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.20.41 PM.jpg" alt="Blade Runner 2049 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.21.06 PM.jpg" alt="Blade Runner 2049 still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film dark" id="1917">
+  <div class="film-head"><div class="film-title">1917</div><div class="film-meta">2019</div></div>
+  <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/YqNYrYUiMfg?rel=0" title="1917: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 2.387"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.17.47 PM.jpg" alt="1917 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.18.08 PM.jpg" alt="1917 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.18.17 PM.jpg" alt="1917 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.18.32 PM.jpg" alt="1917 still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film dark">
+  <div class="film-head"><div class="film-title">1917</div><div class="film-meta">2019</div></div>
+  <div class="film-body"><div class="grid one" style="--ar: 2.387"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.18.45 PM.jpg" alt="1917 still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film dark" id="you-can-see-everything">
+  <div class="film-head"><div class="film-title">You Can See Everything</div><div class="film-meta">2026</div></div>
+  <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/HvW_N5p1q44?rel=0" title="You Can See Everything: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 1.333"><figure class="cell"><img src="stills/You Can See Everything Still 1.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 2.jpg" alt="You Can See Everything still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film dark">
+  <div class="film-head"><div class="film-title">You Can See Everything</div><div class="film-meta">2026</div></div>
+  <div class="film-body"><div class="grid" style="--ar: 1.333"><figure class="cell"><img src="stills/You Can See Everything Still 3.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 4.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 5.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 6.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 7.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 8.jpg" alt="You Can See Everything still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film tan" id="liminal-spaces">
+  <div class="film-head"><div class="film-title">Liminal spaces</div><div class="film-meta">Dreamcore</div></div>
+  <div class="film-body"><div class="grid" style="--ar: 1.389"><figure class="cell"><img src="stills/dreamcore2.jpg" alt="Liminal spaces still" loading="lazy"></figure><figure class="cell"><img src="stills/dreamcore.jpg" alt="Liminal spaces still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.02.56 PM.jpg" alt="Liminal spaces still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.03.38 PM.jpg" alt="Liminal spaces still" loading="lazy"></figure></div></div>
+</section>
+
+<script>
+  // Shrink the 8.5 x 11 pages to fit narrow screens, like a phone.
+  (function () {
+    function fit() {
+      var w = document.documentElement.clientWidth;
+      document.documentElement.style.setProperty("--fit", Math.min(1, (w - 24) / 816).toFixed(4));
+    }
+    fit();
+    window.addEventListener("resize", fit);
+  })();
+</script>
+</body>
+</html>
