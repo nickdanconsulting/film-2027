@@ -82,13 +82,12 @@
   .title-page .sub { margin-top: calc(0.12 * var(--in)); }
   .title-page .muted, .title-page::after { color: #f5f5f5; }
 
-  /* Last page: the three questions again in the text style, white on black like the title page */
-  .end-page { padding: calc(0.5 * var(--in)) calc(0.6 * var(--in)); justify-content: center; align-items: center; text-align: center; background: #0e0e0e; color: #f5f5f5; }
-  .end-page::after { color: #f5f5f5; }
-  .end-page ol { margin: calc(0.3 * var(--in)) auto 0; padding: 0; list-style: none; max-width: calc(5.4 * var(--in)); }
-  .end-page p { text-wrap: balance; }
-  .end-page li + li { margin-top: calc(0.26 * var(--in)); }
-  .end-page li .sub { display: block; margin-bottom: calc(0.05 * var(--in)); }
+  /* Last page: Next steps, built like the cover page (masthead, rule, numbered rows) but white
+     on black like the title page, and centered on the page like it */
+  .end-page { justify-content: center; background: #0e0e0e; --ink: #f5f5f5; --muted: #f5f5f5; --hair: #3a3a3a; color: var(--ink); }
+  .end-page::after { color: var(--ink); }
+  .end-page .rows { flex: none; }
+  .end-page .row { padding: calc(0.16 * var(--in)) 0; }
 
   /* Cover (option A, Nick's pick 2026-09-29): a label on the left of each row. Three devices
      only: square bullets for sentences, a thin line over named things (superpowers, phases),
@@ -367,13 +366,23 @@
 </section>
 
 <section class="page end-page">
-  <div class="block">
-    <div class="sub">Three questions</div>
-    <ol>
-      <li><span class="sub">1</span><p>Are you potentially interested in being a part of this, at any level?</p></li>
-      <li><span class="sub">2</span><p>What role, task, or aspect of this project intrigues you specifically?</p></li>
-      <li><span class="sub">3</span><p>After seeing the Slicing Pie with all the details, if you decide to be a part of this, are you opposed to making time in your schedule to commit to this in 2027?</p></li>
-    </ol>
+  <div class="masthead">
+    <div class="big">Next steps</div>
+    <div class="sub muted">Three questions</div>
+  </div>
+  <div class="rows">
+  <div class="row">
+    <div class="sub label"><span>1</span><span>Interest</span></div>
+    <p>Are you potentially interested in being a part of this, at any level?</p>
+  </div>
+  <div class="row">
+    <div class="sub label"><span>2</span><span>Role</span></div>
+    <p>What role, task, or aspect of this project intrigues you specifically?</p>
+  </div>
+  <div class="row">
+    <div class="sub label"><span>3</span><span>Time</span></div>
+    <p>After seeing the Slicing Pie with all the details, if you decide to be a part of this, are you opposed to making time in your schedule to commit to this in 2027?</p>
+  </div>
   </div>
 </section>
 
