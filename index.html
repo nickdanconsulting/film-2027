@@ -145,11 +145,16 @@
   .grid.one { grid-template-columns: 1fr; }
   .cell { margin: 0; aspect-ratio: var(--ar, 16 / 9); background: #f0f0f0; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; counter-increment: still; }
   /* Still numbers, so Nick can say "look at 23" while he talks */
-  .cell::after { content: counter(still); position: absolute; left: 0.05in; top: 0.05in; font-size: var(--sub); font-weight: 700; letter-spacing: 0.08em; line-height: 1; color: rgba(255, 255, 255, 0.9); background: rgba(0, 0, 0, 0.42); padding: 0.03in 0.05in; border-radius: 2px; }
+  .cell::after { content: counter(still); position: absolute; right: 0.05in; top: 0.05in; font-size: var(--sub); font-weight: 700; letter-spacing: 0.08em; line-height: 1; color: rgba(255, 255, 255, 0.9); background: rgba(0, 0, 0, 0.42); padding: 0.03in 0.05in; border-radius: 2px; }
   .film.dark .cell { background: #080808; }
   /* Tan page for the dreamcore shots, the same tan as the space around them */
   .film.tan, .film.tan .cell { background: #efeadb; }
   .cell img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  /* Nick's quotes, as big title cards like the A24 trailer's */
+  .quote { margin: 0; }
+  .quote blockquote { margin: 0; }
+  .quote figcaption { margin-top: 0.08in; color: var(--muted); }
+  .film.dark .quote figcaption { color: #9a9a9a; }
   .mini { display: flex; flex-direction: column; gap: 0.2in; }
   .mini .row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.06in; }
   .mini .row .muted { color: #9a9a9a; }
@@ -294,9 +299,17 @@
   <div class="film-head"><div class="big">You Can See Everything</div><div class="sub">2026</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.333"><figure class="cell"><img src="stills/You Can See Everything Still 3.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 4.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 5.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 6.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 7.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 8.jpg" alt="You Can See Everything still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film tan" id="liminal-spaces">
+<section class="page film tan" id="liminal">
   <div class="film-head"><div class="big">Liminal spaces</div><div class="sub">Dreamcore</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.389"><figure class="cell"><img src="stills/dreamcore2.jpg" alt="Liminal spaces still" loading="lazy"></figure><figure class="cell"><img src="stills/dreamcore.jpg" alt="Liminal spaces still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.02.56 PM.jpg" alt="Liminal spaces still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.03.38 PM.jpg" alt="Liminal spaces still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film dark" id="higgsfield-1">
+  <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">Genjutsu · Chris Ajtony</div></div>
+  <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/K0ZP3qguptc?rel=0" title="Higgsfield AI: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 1.282"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.05 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.07 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
+</section>
+<section class="page film dark">
+  <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">Genjutsu · Chris Ajtony</div></div>
+  <div class="film-body"><div class="grid" style="--ar: 1.282"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.08 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.09 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.11 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.13 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.15 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.22 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
 
 <script>
