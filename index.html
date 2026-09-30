@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>A feature film · Redding, CA · 2027</title>
+<title>A communal creative film experience · Redding, CA · 2027</title>
 <style>
   /* Type: Helvetica Neue, to match the A24 trailer titles, in exactly three styles.
        Big       Bold 30pt capitals, tight, like BACKROOMS: titles and big numbers
        Text      Regular 9.5pt: everything you read
        Subtitle  Bold 8pt capitals, spaced: labels, captions, and small numbers
-     Color: black and white only. The film's own color (like Backrooms' yellow or Parasite's
-     green) gets picked by the team while making the film, not here. */
+     Color: the cover is black and white. Our film's own color gets picked by the team while
+     making it, not here. Each inspiration film's pages are in that film's key color (build.py). */
   :root {
     --big: 30pt;
     --text: 9.5pt;
@@ -20,8 +20,6 @@
     --ink: #111111;
     --muted: #6f6f6f;
     --hair: #e2e2e2;
-    --dark: #0e0e0e;
-    --paper: #f5f5f5;
 
     /* Motion, from Emil Kowalski's design-engineering skills */
     --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -68,7 +66,6 @@
     zoom: var(--fit, 1);
   }
   .page::after { content: counter(pg); position: absolute; right: 0.6in; bottom: 0.22in; font-size: var(--sub); font-weight: 700; letter-spacing: 0.08em; color: var(--muted); }
-  .film.dark::after { color: #9a9a9a; }
   @media print {
     body { background: #fff; }
     .page { margin: 0; box-shadow: none; zoom: 1 !important; }
@@ -78,25 +75,35 @@
   .masthead { padding-bottom: 0.12in; border-bottom: 1.5px solid var(--ink); }
   .masthead .sub { margin-top: 0.08in; }
   .bands { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
-  .band { display: grid; grid-template-columns: 1.1in 1fr; column-gap: 0.2in; padding: 0.11in 0; border-top: 1px solid var(--hair); }
+  .band { display: grid; grid-template-columns: 1.3in 1fr; column-gap: 0.2in; padding: 0.085in 0; border-top: 1px solid var(--hair); }
   .band:first-child { border-top: 0; }
   .band > .sub { padding-top: 0.02in; }
 
-  .three { display: grid; grid-template-columns: repeat(3, max-content); column-gap: 0.32in; margin-top: 0.06in; }
+  .points { margin: 0; padding: 0; list-style: none; }
+  .points li { position: relative; padding-left: 0.17in; text-wrap: pretty; }
+  .points li + li { margin-top: 0.035in; }
+  .points li::before { content: ""; position: absolute; left: 0.01in; top: 0.062in; width: 0.05in; height: 0.05in; background: var(--ink); }
+
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 0.24in; }
   .three div { border-top: 2px solid var(--ink); padding-top: 0.05in; }
 
-  .formula { margin-bottom: 0.06in; }
-  .formula .muted { margin-right: 0.1in; }
+  /* Slicing Pie, with a simple pie: one slice pulled out */
+  .pie-row { display: grid; grid-template-columns: 1fr 0.9in; column-gap: 0.3in; align-items: center; }
+  .pie-row .sub { margin-bottom: 0.05in; }
+  .pie { display: block; width: 0.9in; height: 0.9in; overflow: visible; }
+  .pie path { fill: #d2d2d2; stroke: #fff; stroke-width: 1.4; stroke-linejoin: round; }
+  .pie .out { fill: var(--ink); stroke: none; transform: translate(4.24px, -4.24px); }
 
   .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.12in 0.2in; margin-top: 0.08in; }
   .stats .sub { margin-top: 0.04in; color: var(--muted); }
   .stats .big { font-variant-numeric: tabular-nums; }
 
-  .phases { display: grid; }
-  .phases div { position: relative; display: grid; grid-template-columns: 1.55in 1fr; column-gap: 0.14in; padding: 0.06in 0; }
+  /* The five phases, left to right in order */
+  .phases { display: grid; grid-template-columns: repeat(5, 1fr); column-gap: 0.12in; }
+  .phases div { position: relative; padding-top: 0.06in; white-space: nowrap; }
   .phases div::before { content: ""; position: absolute; top: 0; left: 0; right: 0; height: 1px; background: var(--ink); }
-  .phases .sub { white-space: nowrap; padding-top: 0.015in; }
-  .after { margin-top: 0.06in; }
+  .phases .sub { display: block; margin-bottom: 0.02in; }
+  .after { margin-top: 0.1in; }
 
   .invite { border-left: 2px solid var(--ink); padding: 0.04in 0.16in; }
   .invite ol { margin: 0.05in 0 0; padding: 0; list-style: none; counter-reset: q; }
@@ -123,6 +130,7 @@
     .cover .phases div:nth-child(3)::before { animation-delay: 680ms; }
     .cover .phases div:nth-child(4)::before { animation-delay: 760ms; }
     .cover .phases div:nth-child(5)::before { animation-delay: 840ms; }
+    .cover .pie .out { animation: pull 600ms var(--ease-out) 700ms both; }
   }
   @media screen and (prefers-reduced-motion: reduce) {
     .cover .masthead, .cover .band { animation: fade 200ms ease both; }
@@ -130,31 +138,31 @@
   @keyframes rise { from { opacity: 0; transform: translateY(8px); filter: blur(4px); } }
   @keyframes fade { from { opacity: 0; } }
   @keyframes draw { from { clip-path: inset(0 100% 0 0); } to { clip-path: inset(0 0 0 0); } }
+  @keyframes pull { from { transform: translate(0, 0); } }
 
-  /* Film pages: the official trailer, then Nick's stills. Dark by default, light where the film is bright. */
-  .film.dark { background: var(--dark); color: var(--paper); }
-  .film-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 0.2in; padding-bottom: 0.1in; border-bottom: 1.5px solid var(--ink); }
-  .film.dark .film-head { border-bottom-color: #2e2e2e; }
+  /* Film pages: the official trailer, then Nick's stills, in the film's own color.
+     build.py sets --bg and --fg on each page; --soft is the quieter text. */
+  .film { background: var(--bg); color: var(--fg); --soft: color-mix(in srgb, var(--fg) 80%, var(--bg)); }
+  .film::after { color: var(--soft); }
+  .film-head { display: flex; justify-content: space-between; align-items: flex-end; gap: 0.2in; padding-bottom: 0.1in; border-bottom: 1.5px solid color-mix(in srgb, var(--fg) 25%, var(--bg)); }
   .film-head .big { margin-top: 0.06in; }
-  .film-head .sub { color: var(--muted); padding-bottom: 0.03in; white-space: nowrap; }
-  .film.dark .film-head .sub { color: #9a9a9a; }
+  .film-head .sub { color: var(--soft); padding-bottom: 0.03in; white-space: nowrap; }
   .film-body { flex: 1; display: flex; flex-direction: column; gap: 0.16in; padding-top: 0.2in; min-height: 0; }
   .trailer { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #000; }
   .trailer iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.14in; }
   .grid.one { grid-template-columns: 1fr; }
-  .cell { margin: 0; aspect-ratio: var(--ar, 16 / 9); background: #f0f0f0; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; counter-increment: still; }
+  .cell { margin: 0; aspect-ratio: var(--ar, 16 / 9); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; counter-increment: still; }
   /* Still numbers, so Nick can say "look at 23" while he talks */
   .cell::after { content: counter(still); position: absolute; right: 0.05in; top: 0.05in; font-size: var(--sub); font-weight: 700; letter-spacing: 0.08em; line-height: 1; color: rgba(255, 255, 255, 0.9); background: rgba(0, 0, 0, 0.42); padding: 0.03in 0.05in; border-radius: 2px; }
-  .film.dark .cell { background: #080808; }
-  /* Tan page for the dreamcore shots, the same tan as the space around them */
-  .film.tan, .film.tan .cell { background: #efeadb; }
   .cell img { width: 100%; height: 100%; object-fit: contain; display: block; }
   /* Nick's quotes, as big title cards like the A24 trailer's */
   .quote { margin: 0; }
   .quote blockquote { margin: 0; }
-  .quote figcaption { margin-top: 0.08in; color: var(--muted); }
-  .film.dark .quote figcaption { color: #9a9a9a; }
+  .quote figcaption { margin-top: 0.08in; color: var(--soft); }
+  /* Someone else's words under their video, like Ben Affleck on AI */
+  .words { margin: 0.06in 0 0; max-width: 5.6in; border-left: 2px solid currentColor; padding: 0.03in 0 0.03in 0.16in; }
+  .words p + p { margin-top: 0.08in; }
   .mini { display: flex; flex-direction: column; gap: 0.2in; }
   .mini .row { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.06in; }
   .mini .row .muted { color: #9a9a9a; }
@@ -166,41 +174,49 @@
 
 <section class="page cover">
   <div class="masthead">
-    <div class="big">A feature film</div>
+    <div class="big">A communal creative film experience</div>
     <div class="sub muted">Redding, CA · 2027</div>
   </div>
 
   <div class="bands">
   <div class="band">
     <div class="sub">Why</div>
-    <div>
-      <p>No one needs permission to make a film anymore.</p>
-      <p>Many people with the talent are waiting for a way in.</p>
-      <p>A community with a plan can be that way in.</p>
-    </div>
+    <ul class="points">
+      <li>In Redding, a community of people is waiting for an opportunity to pursue their filmmaking dreams. This is that opportunity.</li>
+      <li>We each take ownership of one part of the filmmaking process, to make something we couldn't make without each other.</li>
+      <li>It's been said that small teams using AI are the future of the film industry. We can be that team.</li>
+    </ul>
   </div>
 
   <div class="band">
-    <div class="sub">The approach</div>
-    <div>
-      <p class="muted">Three disciplines run the whole project:</p>
-      <div class="three"><div>Focus on the main constraint</div><div>Strategy and planning</div><div>Execution and follow&#8209;through</div></div>
-    </div>
+    <div class="sub">Nick's superpowers</div>
+    <div class="three"><div>Extreme focus on the main constraint</div><div>Strategy and planning</div><div>Execution and follow&#8209;through</div></div>
   </div>
 
   <div class="band">
     <div class="sub">Ownership</div>
-    <div>
-      <div class="formula sub"><span class="muted">Slicing Pie</span>Your points ÷ all points = your share</div>
-      <p>No one owns it by title. Every task earns points, and points are ownership.</p>
-      <p>No one is paid up front. If the film earns money, points decide the split. Leads earn a small bonus.</p>
+    <div class="pie-row">
+      <div>
+        <div class="sub">Slicing Pie</div>
+        <p>No one owns this film by title. Everyone who works on it owns a slice.</p>
+        <p>No one is paid up front. Every task earns points, and your points are your slice.</p>
+        <p>Slices move with the work until the film comes out. Then they lock, and any money the film earns is split by slice.</p>
+      </div>
+      <svg class="pie" viewBox="0 0 100 100" role="img" aria-label="A pie cut into slices of different sizes, with one slice pulled out">
+        <path d="M50 50L89.47 35.64A42 42 0 0 1 62.98 89.94Z"/>
+        <path d="M50 50L62.98 89.94A42 42 0 0 1 15.18 73.49Z"/>
+        <path d="M50 50L15.18 73.49A42 42 0 0 1 11.63 32.92Z"/>
+        <path d="M50 50L11.63 32.92A42 42 0 0 1 37.02 10.06Z"/>
+        <path d="M50 50L37.02 10.06A42 42 0 0 1 64.36 10.53Z"/>
+        <path class="out" d="M50 50L64.36 10.53A42 42 0 0 1 89.47 35.64Z"/>
+      </svg>
     </div>
   </div>
 
   <div class="band">
-    <div class="sub">The AI</div>
+    <div class="sub">Our AI edge</div>
     <div>
-      <p>Built from 15 of YouTube's best filmmaking channels, organized by the five phases.</p>
+      <p>Nick is building an AI trained on 15 of YouTube's best filmmaking channels, organized by the five phases of filmmaking.</p>
       <div class="stats">
         <div><div class="big">12,942</div><div class="sub">videos</div></div>
         <div><div class="big">2,700+</div><div class="sub">hours, a year of watching</div></div>
@@ -212,150 +228,153 @@
   </div>
 
   <div class="band">
-    <div class="sub">The five phases<br><span class="muted">Jan to Dec 2027</span></div>
+    <div class="sub">Five phases of filmmaking<br><span class="muted">12 to 18 month timeline</span></div>
     <div>
       <div class="phases">
-        <div><span class="sub">01 Development</span><span>A want, an obstacle, a story. Pick the ending first.</span></div>
-        <div><span class="sub">02 Pre&#8209;production</span><span>Remove decisions before shoot day.</span></div>
-        <div><span class="sub">03 Production</span><span>Capture it once. Protect quality and time.</span></div>
-        <div><span class="sub">04 Post&#8209;production</span><span>The edit is a second act of writing.</span></div>
-        <div><span class="sub">05 Distribution</span><span>Build in attention. Let mystery do the marketing.</span></div>
+        <div><span class="sub">01</span>Development</div>
+        <div><span class="sub">02</span>Pre&#8209;production</div>
+        <div><span class="sub">03</span>Production</div>
+        <div><span class="sub">04</span>Post&#8209;production</div>
+        <div><span class="sub">05</span>Distribution</div>
       </div>
-      <p class="after">Each phase, three ways: first principles, reverse engineering, inversion.</p>
-      <p>Commit only to the phases your role needs.</p>
-      <p>One optional night a week: in person, on Google&nbsp;Meet, or through the AI notes.</p>
+      <p class="after">We're approaching each phase through first principles, reverse engineering, and inversion.</p>
+      <p>Your commitment isn't to the whole project. It's to your tasks within the phases.</p>
+      <p>As part of the communal experience, there's a weekly meeting at Nick's house or on Google&nbsp;Meet. Attendance is optional. If you're not there, we send you the AI notes and your task assignments.</p>
     </div>
   </div>
 
   <div class="band">
     <div class="sub">The film</div>
     <div>
-      <p>Psychological thriller · suspense · light horror. A feature, about 15 to 25 shoot days.</p>
-      <p>Story written by a small group, starting in January.</p>
+      <p>Psychological thriller · suspense · liminal · light horror</p>
+      <p>A feature film. An original story.</p>
       <p><span class="muted">Inspired by</span> Backrooms, Exit&nbsp;8, Parasite, Blade&nbsp;Runner&nbsp;2049, 1917, You&nbsp;Can&nbsp;See&nbsp;Everything</p>
     </div>
   </div>
 
   <div class="band">
-    <div class="sub">The invitation</div>
+    <div class="sub">Next steps</div>
     <div class="invite">
-      <p>No commitment today. The details come first: the contracts and what each phase needs.</p>
-      <p>Three questions to take home:</p>
+      <p>Three questions:</p>
       <ol>
-        <li>Are you potentially interested in being part of this, at any level?</li>
-        <li>Is there a specific role you'd want?</li>
-        <li>Could you make time in 2027 for what that role needs? How and when is up to you.</li>
+        <li>Are you potentially interested in being a part of this, at any level?</li>
+        <li>What role, task, or aspect of this project intrigues you specifically?</li>
+        <li>After seeing the Slicing Pie with all the details, if you decide to be a part of this, are you opposed to making time in your schedule to commit to this in 2027?</li>
       </ol>
     </div>
   </div>
   </div>
 </section>
 
-<section class="page film dark" id="backrooms">
+<section class="page film" id="backrooms" style="--bg: #a2a25a; --fg: #111111">
   <div class="film-head"><div class="big">Backrooms</div><div class="sub">2026</div></div>
   <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/0HjdiohVOik?rel=0" title="Backrooms: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 1.847"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.09.06 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.09.14 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.09.43 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.00 PM.jpg" alt="Backrooms still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #a2a25a; --fg: #111111">
   <div class="film-head"><div class="big">Backrooms</div><div class="sub">2026</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.847"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.06 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.14 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.17 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.27 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.36 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.54 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.10.59 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.11.18 PM.jpg" alt="Backrooms still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #a2a25a; --fg: #111111">
   <div class="film-head"><div class="big">Backrooms</div><div class="sub">2026</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.847"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.11.23 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.11.37 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.11.41 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.11.51 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.12.13 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.12.35 PM.jpg" alt="Backrooms still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.12.40 PM.jpg" alt="Backrooms still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film light" id="exit-8">
+<section class="page film" id="exit-8" style="--bg: #f3e03b; --fg: #111111">
   <div class="film-head"><div class="big">Exit 8</div><div class="sub">2025</div></div>
   <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/zzEDWwhtAHc?rel=0" title="Exit 8: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 1.848"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.06.59 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.07.11 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.07.34 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.07.45 PM.jpg" alt="Exit 8 still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film light">
+<section class="page film" style="--bg: #f3e03b; --fg: #111111">
   <div class="film-head"><div class="big">Exit 8</div><div class="sub">2025</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.848"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.07.50 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.08.00 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.08.08 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.08.17 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.08.31 PM.jpg" alt="Exit 8 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.08.44 PM.jpg" alt="Exit 8 still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark" id="parasite">
+<section class="page film" id="parasite" style="--bg: #34573a; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Parasite</div><div class="sub">2019</div></div>
   <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/isOGD_7hNIY?rel=0" title="Parasite: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 2.391"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.14.58 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.06 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.19 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.24 PM.jpg" alt="Parasite still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #34573a; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Parasite</div><div class="sub">2019</div></div>
   <div class="film-body"><div class="grid" style="--ar: 2.391"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.31 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.36 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.41 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.15.51 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.16.00 PM.jpg" alt="Parasite still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.16.14 PM.jpg" alt="Parasite still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark" id="blade-runner-2049">
+<section class="page film" id="blade-runner-2049" style="--bg: #d4782c; --fg: #111111">
   <div class="film-head"><div class="big">Blade Runner 2049</div><div class="sub">2017</div></div>
   <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/gCcx85zbxz4?rel=0" title="Blade Runner 2049: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 2.385"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.21.06 PM.jpg" alt="Blade Runner 2049 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.35.51 PM.jpg" alt="Blade Runner 2049 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.36.15 PM.jpg" alt="Blade Runner 2049 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.36.24 PM.jpg" alt="Blade Runner 2049 still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark" id="1917">
+<section class="page film" id="1917" style="--bg: #5b6140; --fg: #f5f5f5">
   <div class="film-head"><div class="big">1917</div><div class="sub">2019</div></div>
   <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/YqNYrYUiMfg?rel=0" title="1917: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 2.384"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.17.47 PM.jpg" alt="1917 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.18.08 PM.jpg" alt="1917 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.18.17 PM.jpg" alt="1917 still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.18.32 PM.jpg" alt="1917 still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #5b6140; --fg: #f5f5f5">
   <div class="film-head"><div class="big">1917</div><div class="sub">2019</div></div>
   <div class="film-body"><div class="grid one" style="--ar: 2.384"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.18.45 PM.jpg" alt="1917 still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark" id="you-can-see-everything">
+<section class="page film" id="you-can-see-everything" style="--bg: #122a42; --fg: #f5f5f5">
   <div class="film-head"><div class="big">You Can See Everything</div><div class="sub">2026</div></div>
   <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/HvW_N5p1q44?rel=0" title="You Can See Everything: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 1.333"><figure class="cell"><img src="stills/You Can See Everything Still 1.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 2.jpg" alt="You Can See Everything still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #122a42; --fg: #f5f5f5">
   <div class="film-head"><div class="big">You Can See Everything</div><div class="sub">2026</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.333"><figure class="cell"><img src="stills/You Can See Everything Still 3.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 4.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 5.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 6.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 7.jpg" alt="You Can See Everything still" loading="lazy"></figure><figure class="cell"><img src="stills/You Can See Everything Still 8.jpg" alt="You Can See Everything still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film tan" id="dreamcore">
+<section class="page film" id="dreamcore" style="--bg: #efeadb; --fg: #111111">
   <div class="film-head"><div class="big">Dreamcore</div></div>
-  <div class="film-body"><div class="grid" style="--ar: 1.389"><figure class="cell"><img src="stills/dreamcore2.jpg" alt="Dreamcore still" loading="lazy"></figure><figure class="cell"><img src="stills/dreamcore.jpg" alt="Dreamcore still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.02.56 PM.jpg" alt="Dreamcore still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.03.38 PM.jpg" alt="Dreamcore still" loading="lazy"></figure></div></div>
+  <div class="film-body"><div class="grid" style="--ar: 1.778"><figure class="cell"><img src="stills/dreamcore2.jpg" alt="Dreamcore still" loading="lazy"></figure><figure class="cell"><img src="stills/dreamcore.jpg" alt="Dreamcore still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.02.56 PM.jpg" alt="Dreamcore still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 4.03.38 PM.jpg" alt="Dreamcore still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.19.24 PM.jpg" alt="Dreamcore still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.19.37 PM.jpg" alt="Dreamcore still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.19.53 PM.jpg" alt="Dreamcore still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.20.05 PM.jpg" alt="Dreamcore still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark" id="higgsfield-1">
+<section class="page film" id="ben-affleck" style="--bg: #0e0e0e; --fg: #f5f5f5">
+  <div class="film-head"><div class="big">Ben Affleck</div><div class="sub">On AI · The Joe Rogan Experience, 2026</div></div>
+  <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/O-2OsvVJC0s?rel=0&start=58" title="Ben Affleck: on AI" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><blockquote class="words"><p>“Really, what it is, is going to be a tool. Just like visual effects. We don&#x27;t have to go to the North Pole. We can shoot the scene here in our parkas and make it appear as if we&#x27;re at the North Pole. It saves us a lot of money, a lot of time. We&#x27;re going to focus on the performances.</p><p>It&#x27;s going to be good at filling in all the places that are expensive and burdensome. And it&#x27;s always going to rely fundamentally on the human artistic aspects of it.”</p></blockquote></div>
+</section>
+<section class="page film" id="higgsfield-1" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">Genjutsu · Chris Ajtony</div></div>
   <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/K0ZP3qguptc?rel=0" title="Higgsfield AI: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 1.282"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.05 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.07 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">Genjutsu · Chris Ajtony</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.282"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.08 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.09 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.11 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.13 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.15 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 5.58.22 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark" id="higgsfield-2">
+<section class="page film" id="higgsfield-2" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">Genjutsu · AI Border</div></div>
   <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/wM9S_iyuRUo?rel=0" title="Higgsfield AI: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 1.778"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.00.37 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.00.46 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.00.54 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.01.01 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">Genjutsu · AI Border</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.778"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.01.14 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.01.27 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.01.34 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.01.52 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.01.59 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.03.06 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.05.03 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.05.15 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">Genjutsu · AI Border</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.778"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.05.18 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.05.24 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.05.33 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.05.41 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.05.47 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.05.55 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.06.03 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.06.07 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark" id="higgsfield-3">
+<section class="page film" id="higgsfield-3" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">Previs · Higgsfield</div></div>
   <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/vUYq38wC_xI?rel=0&start=351" title="Higgsfield AI: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 1.778"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.08.43 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.08.46 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.08.51 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.09.08 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">Previs · Higgsfield</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.778"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.09.36 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.09.38 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.09.41 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.10.06 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.10.09 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.10.20 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.10.35 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.10.38 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">Previs · Higgsfield</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.778"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.10.40 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.11.01 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.11.15 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.11.20 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.11.25 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.11.46 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.11.51 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.11.54 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">Previs · Higgsfield</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.778"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.12.28 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.12.34 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.12.37 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.12.40 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.12.42 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark" id="higgsfield-4">
+<section class="page film" id="higgsfield-4" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">Car commercial · Higgsfield</div></div>
   <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/GNxmt_4IifA?rel=0" title="Higgsfield AI: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 1.778"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.14.03 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.14.22 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.14.26 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.14.28 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">Car commercial · Higgsfield</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.778"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.14.31 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.14.33 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.14.44 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.14.49 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.14.51 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.14.52 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.14.54 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark" id="higgsfield-5">
+<section class="page film" id="higgsfield-5" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">AI VFX · Higgsfield</div></div>
   <div class="film-body"><div class="trailer"><iframe src="https://www.youtube-nocookie.com/embed/Yte-UGhYkPQ?rel=0" title="Higgsfield AI: official trailer" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="grid" style="--ar: 1.778"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.16.58 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.02 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.04 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.05 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">AI VFX · Higgsfield</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.778"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.08 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.22 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.34 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.36 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.39 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.43 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.47 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.51 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
-<section class="page film dark">
+<section class="page film" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub">AI VFX · Higgsfield</div></div>
   <div class="film-body"><div class="grid" style="--ar: 1.778"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.52 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.55 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.18.00 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
 </section>
