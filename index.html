@@ -82,6 +82,13 @@
   .title-page .sub { margin-top: calc(0.12 * var(--in)); }
   .title-page .muted, .title-page::after { color: #f5f5f5; }
 
+  /* Last page: the three questions again, big, white on black like the title page */
+  .end-page { padding: calc(0.5 * var(--in)) calc(0.6 * var(--in)); justify-content: center; align-items: center; text-align: center; background: #0e0e0e; color: #f5f5f5; }
+  .end-page::after { color: #f5f5f5; }
+  .end-page ol { margin: calc(0.45 * var(--in)) 0 0; padding: 0; list-style: none; }
+  .end-page li + li { margin-top: calc(0.4 * var(--in)); }
+  .end-page li .sub { display: block; margin-bottom: calc(0.1 * var(--in)); }
+
   /* Cover (option A, Nick's pick 2026-09-29): a label on the left of each row. Three devices
      only: square bullets for sentences, a thin line over named things (superpowers, phases),
      numbers for the questions. */
@@ -356,6 +363,17 @@
 <section class="page film" style="--bg: #0e0e0e; --fg: #f5f5f5">
   <div class="film-head"><div class="big">Higgsfield AI</div><div class="sub meta"><div>AI VFX · Higgsfield</div></div></div>
   <div class="film-body"><div class="grid" style="--cols: 2; --ar: 1.778"><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.34 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.36 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.39 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.43 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.47 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.51 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.17.52 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure><figure class="cell"><img src="stills/Screenshot 2026-09-29 at 6.18.00 PM.jpg" alt="Higgsfield AI still" loading="lazy"></figure></div></div>
+</section>
+
+<section class="page end-page">
+  <div class="block">
+    <div class="sub">Three questions</div>
+    <ol>
+      <li><span class="sub">1</span><div class="big">Are you potentially interested in being a part of this, at any level?</div></li>
+      <li><span class="sub">2</span><div class="big">What role, task, or aspect of this project intrigues you specifically?</div></li>
+      <li><span class="sub">3</span><div class="big">After seeing the Slicing Pie with all the details, if you decide to be a part of this, are you opposed to making time in your schedule to commit to this in 2027?</div></li>
+    </ol>
+  </div>
 </section>
 
 </body>
