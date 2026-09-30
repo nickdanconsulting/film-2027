@@ -76,6 +76,10 @@
     .page { margin: 0; box-shadow: none; }
   }
 
+  /* Title page: the title and the place as one block, dead center (even padding all round) */
+  .title-page { padding: calc(0.5 * var(--in)) calc(0.6 * var(--in)); justify-content: center; align-items: center; text-align: center; }
+  .title-page .sub { margin-top: calc(0.12 * var(--in)); }
+
   /* Cover (option A, Nick's pick 2026-09-29): a label on the left of each row. Three devices
      only: square bullets for sentences, a thin line over named things (superpowers, phases),
      numbers for the questions. */
@@ -122,7 +126,7 @@
      is the point. Only transform, opacity, filter, and clip-path move. Reduced motion gets a
      plain fade; print gets nothing. */
   @media screen and (prefers-reduced-motion: no-preference) {
-    .cover .masthead, .cover .row { animation: rise 560ms var(--ease-out) both; }
+    .title-page .block, .cover .masthead, .cover .row { animation: rise 560ms var(--ease-out) both; }
     .cover .row:nth-child(1) { animation-delay: 120ms; }
     .cover .row:nth-child(2) { animation-delay: 180ms; }
     .cover .row:nth-child(3) { animation-delay: 240ms; }
@@ -139,7 +143,7 @@
     .cover .pie .out { animation: pull 600ms var(--ease-out) 700ms both; }
   }
   @media screen and (prefers-reduced-motion: reduce) {
-    .cover .masthead, .cover .row { animation: fade 200ms ease both; }
+    .title-page .block, .cover .masthead, .cover .row { animation: fade 200ms ease both; }
   }
   @keyframes rise { from { opacity: 0; transform: translateY(8px); filter: blur(4px); } }
   @keyframes fade { from { opacity: 0; } }
@@ -169,6 +173,13 @@
 </style>
 </head>
 <body>
+
+<section class="page title-page">
+  <div class="block">
+    <div class="big">A communal creative film project</div>
+    <div class="sub muted">Redding, CA · 2027</div>
+  </div>
+</section>
 
 <section class="page cover">
   <div class="masthead">
