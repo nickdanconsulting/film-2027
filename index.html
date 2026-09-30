@@ -82,12 +82,13 @@
   .title-page .sub { margin-top: calc(0.12 * var(--in)); }
   .title-page .muted, .title-page::after { color: #f5f5f5; }
 
-  /* Last page: the three questions again, big, white on black like the title page */
+  /* Last page: the three questions again in the text style, white on black like the title page */
   .end-page { padding: calc(0.5 * var(--in)) calc(0.6 * var(--in)); justify-content: center; align-items: center; text-align: center; background: #0e0e0e; color: #f5f5f5; }
   .end-page::after { color: #f5f5f5; }
-  .end-page ol { margin: calc(0.45 * var(--in)) 0 0; padding: 0; list-style: none; }
-  .end-page li + li { margin-top: calc(0.4 * var(--in)); }
-  .end-page li .sub { display: block; margin-bottom: calc(0.1 * var(--in)); }
+  .end-page ol { margin: calc(0.3 * var(--in)) auto 0; padding: 0; list-style: none; max-width: calc(5.4 * var(--in)); }
+  .end-page p { text-wrap: balance; }
+  .end-page li + li { margin-top: calc(0.26 * var(--in)); }
+  .end-page li .sub { display: block; margin-bottom: calc(0.05 * var(--in)); }
 
   /* Cover (option A, Nick's pick 2026-09-29): a label on the left of each row. Three devices
      only: square bullets for sentences, a thin line over named things (superpowers, phases),
@@ -369,9 +370,9 @@
   <div class="block">
     <div class="sub">Three questions</div>
     <ol>
-      <li><span class="sub">1</span><div class="big">Are you potentially interested in being a part of this, at any level?</div></li>
-      <li><span class="sub">2</span><div class="big">What role, task, or aspect of this project intrigues you specifically?</div></li>
-      <li><span class="sub">3</span><div class="big">After seeing the Slicing Pie with all the details, if you decide to be a part of this, are you opposed to making time in your schedule to commit to this in 2027?</div></li>
+      <li><span class="sub">1</span><p>Are you potentially interested in being a part of this, at any level?</p></li>
+      <li><span class="sub">2</span><p>What role, task, or aspect of this project intrigues you specifically?</p></li>
+      <li><span class="sub">3</span><p>After seeing the Slicing Pie with all the details, if you decide to be a part of this, are you opposed to making time in your schedule to commit to this in 2027?</p></li>
     </ol>
   </div>
 </section>
