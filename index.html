@@ -76,9 +76,11 @@
     .page { margin: 0; box-shadow: none; }
   }
 
-  /* Title page: the title and the place as one block, dead center (even padding all round) */
-  .title-page { padding: calc(0.5 * var(--in)) calc(0.6 * var(--in)); justify-content: center; align-items: center; text-align: center; }
+  /* Title page: the title and the place as one block, dead center (even padding all round),
+     white on black (Nick, 2026-09-29) */
+  .title-page { padding: calc(0.5 * var(--in)) calc(0.6 * var(--in)); justify-content: center; align-items: center; text-align: center; background: #0e0e0e; color: #f5f5f5; }
   .title-page .sub { margin-top: calc(0.12 * var(--in)); }
+  .title-page .muted, .title-page::after { color: #f5f5f5; }
 
   /* Cover (option A, Nick's pick 2026-09-29): a label on the left of each row. Three devices
      only: square bullets for sentences, a thin line over named things (superpowers, phases),
